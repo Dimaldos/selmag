@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>[[${product.title}]]</title>
 </head>
 <body>
-<a data-th-href="@{/catalogue/products/list}">&larr; К списку товаров</a>
-<h1 data-th-text="${product.title}"></h1>
+<a th:href="@{/catalogue/products/list}">&larr; К списку товаров</a>
+<h1 th:text="${product.title}"></h1>
 <ul>
-    <li><strong>ID</strong>: <span data-th-text="${product.id}"></span></li>
-    <li><strong>Название</strong>: <span data-th-text="${product.title}"></span></li>
-    <li><strong>Описание</strong>: <span data-th-text="${product.details}"></span></li>
+    <li><strong>ID</strong>: <span th:text="${product.id}"></span></li>
+    <li><strong>Название</strong>: <span th:text="${product.title}"></span></li>
+    <li><strong>Описание</strong>: <span th:text="${product.details}"></span></li>
 </ul>
-<a data-th-href="@{/catalogue/products/{productId}/edit(productId=${product.id})}">Редактировать</a>
-<form method="post" data-th-action="@{/catalogue/products/{productId}/delete(productId=${product.id})}">
+<a th:href="@{/catalogue/products/{productId}/edit(productId=${product.id})}">Редактировать</a>
+<form method="post" th:action="@{/catalogue/products/{productId}/delete(productId=${product.id})}">
     <button type="submit">Удалить</button>
 </form>
 </body>

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Редактиворание товара [[${product.title}]]</title>
 </head>
 <body>
-<a data-th-href="@{/catalogue/products/{productId}(productId=${product.id})}">&larr; К товару</a>
+<a th:href="@{/catalogue/products/{productId}(productId=${product.id})}">&larr; К товару</a>
 <h1>Редактирование товара [[${product.title}]]</h1>
-<form method="post" data-th-action="@{/catalogue/products/{productId}/edit(productId=${product.id})}">
+<form method="post" th:action="@{/catalogue/products/{productId}/edit(productId=${product.id})}">
     <label>
         Название:<br>
-        <input type="text" name="title" data-th-value="${product.title}">
+        <input type="text" name="title" th:value="${product.title}">
     </label><br>
     <label>
         Описание:<br>
-        <textarea name="details" data-th-text="${product.details}"></textarea>
+        <textarea name="details" th:text="${product.details}"></textarea>
     </label><br>
     <button type="submit">Изменить</button>
 </form>

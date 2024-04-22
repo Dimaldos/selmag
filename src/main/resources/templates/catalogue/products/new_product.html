@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Новый товаров</title>
 </head>
 <body>
-<a data-th-href="@{/catalogue/products/list}">&larr; К списку товаров</a>
+<a th:href="@{/catalogue/products/list}">&larr; К списку товаров</a>
 <h1>Новый товар</h1>
-<div data-th-if="${errors}">
+<div th:if="${errors}">
     <h2>Допущены ошибки</h2>
     <ul>
-        <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
+        <li th:each="error: ${errors}" th:text="${error}"></li>
     </ul>
 </div>
-<form method="post" data-th-action="@{/catalogue/products/create}">
+<form method="post" th:action="@{/catalogue/products/create}">
     <label>
         Название:<br>
-        <input type="text" name="title" data-th-value="${payload?.title}">
+        <input type="text" name="title" th:value="${payload?.title}">
     </label><br>
     <label>
         Описание:<br>
-        <textarea name="details" data-th-value="${payload?.details}"></textarea>
+        <textarea name="details" th:value="${payload?.details}"></textarea>
     </label><br>
     <button type="submit">Создать</button>
 </form>
