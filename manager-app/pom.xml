@@ -8,11 +8,11 @@
         <version>3.2.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>ru.dimaldos</groupId>
-    <artifactId>Sandbox</artifactId>
+    <groupId>ru.dimaldos.selmag</groupId>
+    <artifactId>manager-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Sandbox</name>
-    <description>Sandbox</description>
+    <name>manager-app</name>
+    <description>manager-app</description>
     <properties>
         <java.version>22</java.version>
     </properties>
