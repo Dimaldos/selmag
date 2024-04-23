@@ -8,7 +8,7 @@
         <version>3.2.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>ru.dimaldos.selmag</groupId>
+    <groupId>ru.dimaldos.sandbox</groupId>
     <artifactId>manager-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>manager-app</name>
