@@ -1,6 +1,6 @@
-package ru.dimaldos.selmag.managerapp.repository;
+package ru.dimaldos.selmag.catalogueservice.repository;
 
-import ru.dimaldos.selmag.managerapp.entity.Product;
+import ru.dimaldos.selmag.catalogueservice.entity.Product;
 
 import java.util.List;
 import java.util.Optional;
