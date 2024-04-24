@@ -1,7 +1,7 @@
-package ru.dimaldos.selmag.managerapp.repository;
+package ru.dimaldos.selmag.catalogueservice.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.dimaldos.selmag.managerapp.entity.Product;
+import ru.dimaldos.selmag.catalogueservice.entity.Product;
 
 import java.util.*;
 import java.util.stream.IntStream;
