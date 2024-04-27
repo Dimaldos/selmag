@@ -11,7 +11,6 @@ import ru.dimaldos.selmag.catalogueservice.controller.payload.NewProductPayload;
 import ru.dimaldos.selmag.catalogueservice.entity.Product;
 import ru.dimaldos.selmag.catalogueservice.service.ProductService;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,7 +21,7 @@ public class ProductsRestController {
     private final ProductService productService;
 
     @GetMapping
-    public List<Product> findProducts() {
+    public Iterable<Product> findProducts() {
         return this.productService.findAllProducts();
     }
 
