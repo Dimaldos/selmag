@@ -20,7 +20,7 @@ public class DefaultProductService implements ProductService {
         if (filter == null || filter.isBlank()) {
             return productRepository.findAll();
         } else {
-            return productRepository.findAllByTitleLikeIgnoreCase(filter);
+            return productRepository.findAllByTitleLikeIgnoreCase("%" + filter + "%");
         }
     }
 
@@ -43,7 +43,8 @@ public class DefaultProductService implements ProductService {
                     product.setTitle(title);
                     product.setDetails(details);
                     this.productRepository.save(product);
-                }, () -> {throw new NoSuchElementException();
+                }, () -> {
+                    throw new NoSuchElementException();
                 });
     }
 

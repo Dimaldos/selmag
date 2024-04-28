@@ -51,9 +51,8 @@ public class ProductController {
             this.productService.updateProduct(product.id(), payload.title(), payload.details());
             return "redirect:/catalogue/products/%d".formatted(product.id());
         } catch (BadRequestException exception) {
-            model.addAllAttributes(Map.of(
-                    "payload", payload,
-                    "errors", exception.getErrors()));
+            model.addAttribute("payload", payload);
+            model.addAttribute("errors", exception.getErrors());
             return "catalogue/products/edit";
         }
     }
@@ -67,8 +66,10 @@ public class ProductController {
     @ExceptionHandler(NoSuchElementException.class)
     public String handleNoSuchElementException(NoSuchElementException exception, Model model, HttpServletResponse response, Locale locale) {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        model.addAllAttributes(Map.of("error",
-                this.messageSource.getMessage(exception.getMessage(), null, locale)));
+        model.addAttribute(
+                "error",
+                this.messageSource.getMessage(exception.getMessage(), null, locale)
+        );
         return "errors/404";
     }
 
