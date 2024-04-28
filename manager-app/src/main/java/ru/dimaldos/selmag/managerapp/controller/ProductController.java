@@ -17,7 +17,6 @@ import ru.dimaldos.selmag.managerapp.entity.Product;
 import ru.dimaldos.selmag.managerapp.service.ProductService;
 
 import java.util.Locale;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Controller
