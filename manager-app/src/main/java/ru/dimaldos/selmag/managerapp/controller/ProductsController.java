@@ -1,13 +1,16 @@
 package ru.dimaldos.selmag.managerapp.controller;
 
-import lombok.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.web.bind.annotation.*;
-import ru.dimaldos.selmag.managerapp.client.*;
-import ru.dimaldos.selmag.managerapp.controller.payload.*;
-import ru.dimaldos.selmag.managerapp.entity.*;
-import ru.dimaldos.selmag.managerapp.service.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import ru.dimaldos.selmag.managerapp.client.BadRequestException;
+import ru.dimaldos.selmag.managerapp.controller.payload.NewProductPayload;
+import ru.dimaldos.selmag.managerapp.entity.Product;
+import ru.dimaldos.selmag.managerapp.service.ProductService;
 
 @Controller
 @RequiredArgsConstructor
