@@ -15,8 +15,8 @@ public class DefaultProductService implements ProductService {
     private final ProductsRestClient productsRestClient;
 
     @Override
-    public List<Product> findAllProducts() {
-        return productsRestClient.findAllProducts();
+    public List<Product> findAllProducts(String filter) {
+        return productsRestClient.findAllProducts(filter);
     }
 
     @Override

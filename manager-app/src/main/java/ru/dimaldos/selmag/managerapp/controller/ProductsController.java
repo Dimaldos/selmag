@@ -6,12 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.dimaldos.selmag.managerapp.client.BadRequestException;
 import ru.dimaldos.selmag.managerapp.controller.payload.NewProductPayload;
 import ru.dimaldos.selmag.managerapp.entity.Product;
 import ru.dimaldos.selmag.managerapp.service.ProductService;
-
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,8 +20,9 @@ public class ProductsController {
     private final ProductService productService;
 
     @GetMapping(value = "list")
-    public String getProductsList(Model model) {
-        model.addAllAttributes(Map.of("products", this.productService.findAllProducts()));
+    public String getProductsList(Model model, @RequestParam(name = "filter", required = false) String filter) {
+        model.addAttribute("products", this.productService.findAllProducts(filter));
+        model.addAttribute("filter", filter);
         return "catalogue/products/list";
     }
 
@@ -37,9 +37,8 @@ public class ProductsController {
             Product product = this.productService.createProduct(payload.title(), payload.details());
             return "redirect:/catalogue/products/%d".formatted(product.id());
         } catch (BadRequestException exception) {
-            model.addAllAttributes(Map.of(
-                    "payload", payload,
-                    "errors", exception.getErrors()));
+            model.addAttribute("payload", payload);
+            model.addAttribute("errors", exception.getErrors());
             return "/catalogue/products/new_product";
         }
     }

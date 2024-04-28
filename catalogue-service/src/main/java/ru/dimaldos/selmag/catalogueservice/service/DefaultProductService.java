@@ -1,11 +1,11 @@
 package ru.dimaldos.selmag.catalogueservice.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.dimaldos.selmag.catalogueservice.entity.Product;
 import ru.dimaldos.selmag.catalogueservice.repository.ProductRepository;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -16,11 +16,16 @@ public class DefaultProductService implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public List<Product> findAllProducts() {
-        return productRepository.findAll();
+    public Iterable<Product> findAllProducts(String filter) {
+        if (filter == null || filter.isBlank()) {
+            return productRepository.findAll();
+        } else {
+            return productRepository.findAllByTitleLikeIgnoreCase("%" + filter + "%");
+        }
     }
 
     @Override
+    @Transactional
     public Product createProduct(String title, String details) {
         return this.productRepository.save(new Product(null, title, details));
     }
@@ -31,16 +36,20 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
+    @Transactional
     public void updateProduct(Integer id, String title, String details) {
         this.productRepository.findById(id)
                 .ifPresentOrElse(product -> {
                     product.setTitle(title);
                     product.setDetails(details);
-                }, () -> {throw new NoSuchElementException();
+                    this.productRepository.save(product);
+                }, () -> {
+                    throw new NoSuchElementException();
                 });
     }
 
     @Override
+    @Transactional
     public void deleteProduct(Integer id) {
         this.productRepository.deleteById(id);
     }

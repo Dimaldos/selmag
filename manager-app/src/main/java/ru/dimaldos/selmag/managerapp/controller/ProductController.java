@@ -5,14 +5,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.dimaldos.selmag.managerapp.client.BadRequestException;
 import ru.dimaldos.selmag.managerapp.controller.payload.UpdateProductPayload;
 import ru.dimaldos.selmag.managerapp.entity.Product;
 import ru.dimaldos.selmag.managerapp.service.ProductService;
 
 import java.util.Locale;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -46,9 +50,8 @@ public class ProductController {
             this.productService.updateProduct(product.id(), payload.title(), payload.details());
             return "redirect:/catalogue/products/%d".formatted(product.id());
         } catch (BadRequestException exception) {
-            model.addAllAttributes(Map.of(
-                    "payload", payload,
-                    "errors", exception.getErrors()));
+            model.addAttribute("payload", payload);
+            model.addAttribute("errors", exception.getErrors());
             return "catalogue/products/edit";
         }
     }
@@ -62,8 +65,10 @@ public class ProductController {
     @ExceptionHandler(NoSuchElementException.class)
     public String handleNoSuchElementException(NoSuchElementException exception, Model model, HttpServletResponse response, Locale locale) {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        model.addAllAttributes(Map.of("error",
-                this.messageSource.getMessage(exception.getMessage(), null, locale)));
+        model.addAttribute(
+                "error",
+                this.messageSource.getMessage(exception.getMessage(), null, locale)
+        );
         return "errors/404";
     }
 
