@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: "catalogue"
+      POSTGRES_USER: "catalogue"
+      POSTGRES_PASSWORD: "catalogue"
+    ports:
+      - "5432:5432"
